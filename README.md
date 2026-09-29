@@ -11,7 +11,17 @@
 | [`robot_gripper`](robot_gripper/README.md) | UR5e 与夹爪的 URDF，以及 Gazebo 硬件接口 |
 | [`moveit_robot_setup`](moveit_robot_setup/README.md) | 规划组、运动学、碰撞、控制器 |
 | [`robot_move`](robot_move/README.md) | 仿真世界与搬运节点 |
-| `Universal_Robots_ROS2_Description` | 上游 UR 描述，安装后包名为 `ur_description` |
+| `Universal_Robots_ROS2_Description` | 上游 UR 描述，需单独克隆，安装后包名为 `ur_description` |
+
+## 获取 UR 描述
+
+本仓库不含 UR 官方模型。构建前，在项目根目录（本 README 所在目录）克隆 Jazzy 分支：
+
+```bash
+git clone -b jazzy https://github.com/UniversalRobots/Universal_Robots_ROS2_Description.git
+```
+
+得到 `Universal_Robots_ROS2_Description/`，与 `robot_gripper`、`moveit_robot_setup`、`robot_move` 同级。
 
 ## 构建
 
