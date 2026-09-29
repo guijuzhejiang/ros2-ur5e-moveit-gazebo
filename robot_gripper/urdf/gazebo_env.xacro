@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+
+    <!-- ros2 control parameters necessary to simulate the arm in gazebo corresponding to the ones created in moveit2-->
+
+    <ros2_control name="URrobot" type="system">
+        <hardware>
+            <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+        </hardware>
+
+        <joint name="shoulder_pan_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="shoulder_lift_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="elbow_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="wrist_1_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="wrist_2_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="wrist_3_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+    </ros2_control>
+
+    <ros2_control name="GripperGazeboSystem" type="system">
+        <hardware>
+            <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+        </hardware>
+
+        <joint name="left_finger_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+                <param name="initial_value">0.0</param>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="right_finger_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+                 <param name="initial_value">0.0</param>
+           <state_interface name="velocity"/>
+        </joint>
+    </ros2_control>
+
+    <gazebo reference="tool0">
+        <material>Gazebo/Blue</material>
+        <inertial>
+            <mass value="0.001"/>
+            <inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.0001"/>
+        </inertial>
+    </gazebo>
+
+    <gazebo>
+        <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+            <parameters>$(find moveit_robot_setup)/config/ros2_controllers.yaml</parameters>
+        </plugin>
+    </gazebo>
+</robot> 

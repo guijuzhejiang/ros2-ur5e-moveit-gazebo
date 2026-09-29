@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:macro name = "gripper">
+
+    <link name="gripper_base_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.03" length = "  0.02"/>
+            </geometry>
+            <material name="red">
+                <color rgba="1.0 0 0 1.0"/>
+            </material>
+        </visual>
+
+        <collision>
+            <geometry>
+                <cylinder radius="0.03" length = "  0.02"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.2"/>
+            <inertia  ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+        </inertial>
+    </link>
+
+    <!--left finger joint-->
+    <joint name="left_finger_joint" type="prismatic">
+        <parent link ="gripper_base_link"/>
+        <child link ="left_finger"/>
+        <origin xyz = "0 0.03 0.03"/>
+        <axis xyz = "0 -1 0"/>
+        <limit lower ="-0.0001" upper="0.02555" effort="50" velocity="0.1"/>
+    </joint>
+
+    <link name="left_finger">
+        <visual>
+            <geometry>
+                <box size = "0.01 0.01 0.04"/>
+            </geometry>
+            <material name="yellow">
+                <color rgba="1 1 0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size = "0.01 0.01 0.04"/>
+            </geometry>
+        </collision>
+
+        <inertial>
+            <mass value="0.02"/>
+            <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+        </inertial>
+    </link>
+
+    <!--right finger joint-->
+    <joint name="right_finger_joint" type="prismatic">
+        <parent link ="gripper_base_link"/>
+        <child link ="right_finger"/>
+        <origin xyz = "0 -0.03 0.03"/>
+        <axis xyz = "0 1 0"/>
+        <limit lower ="-0.0001" upper="0.02555" effort="50" velocity="0.1"/>
+    </joint>
+
+    <link name="right_finger">
+        <visual>
+            <geometry>
+                <box size = "0.01 0.01 0.04"/>
+            </geometry>
+            <material name="yellow">
+                <color rgba="1 1 0 1.0"/>
+            </material>
+        </visual>
+
+        <collision>
+            <geometry>
+                <box size = "0.01 0.01 0.04"/>
+            </geometry>
+        </collision>
+
+        <inertial>
+            <mass value="0.02"/>
+            <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+        </inertial>
+    </link>
+
+</xacro:macro>
+</robot>

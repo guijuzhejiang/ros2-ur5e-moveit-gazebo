@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot_gripper">
+
+    <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro"/>
+    <xacro:include filename="$(find robot_gripper)/urdf/gripper_macro.xacro"/>
+
+    <link name="world"/>
+
+    <xacro:ur_robot name="ur"
+                    tf_prefix=""
+                    parent="world"
+                    joint_limits_parameters_file="$(find ur_description)/config/ur5e/joint_limits.yaml"
+                    kinematics_parameters_file="$(find ur_description)/config/ur5e/default_kinematics.yaml"
+                    physical_parameters_file="$(find ur_description)/config/ur5e/physical_parameters.yaml"
+                    visual_parameters_file="$(find ur_description)/config/ur5e/visual_parameters.yaml"
+                    safety_limits="false"
+                    safety_pos_margin="0.15"
+                    safety_k_position="20">
+        <origin xyz ="0 0 0.8" rpy="0 0 0"/>
+    </xacro:ur_robot>
+
+    <xacro:gripper/>
+
+
+<link name="gripper_adapter_link">
+    <inertial>
+        <mass value="0.01"/>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+    <visual>
+        <geometry>
+            <box size="0.001 0.001 0.001"/>
+        </geometry>
+    </visual>
+    <collision>
+        <geometry>
+            <box size="0.001 0.001 0.001"/>
+        </geometry>
+    </collision>
+</link>
+
+<joint name="tool0_to_adapter" type="fixed">
+    <parent link="tool0"/>
+    <child link="gripper_adapter_link"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+</joint>
+
+<joint name="adapter_gripper" type="fixed">
+    <parent link="gripper_adapter_link"/>
+    <child link="gripper_base_link"/>
+    <origin xyz="0.0 0.0 0.01" rpy="0.0 0.0 0.0"/>
+</joint>
+
+<xacro:include filename="$(find robot_gripper)/urdf/gazebo_env.xacro"/>
+
+</robot>
