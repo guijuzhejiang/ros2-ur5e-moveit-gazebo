@@ -23,7 +23,7 @@ source install/setup.bash
 
 ## 运行
 
-终端 1，先等 Gazebo 中出现机器人、控制器加载结束：
+终端 1：
 
 ```bash
 ros2 launch robot_move gazebo_move.launch.py

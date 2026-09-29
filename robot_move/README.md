@@ -6,7 +6,7 @@ Gazebo 世界与搬运节点。世界 `robot_world` 中有地面、2 m × 2 m ×
 
 ## 启动
 
-两个终端都在工作空间根目录，且已 `source install/setup.bash`。先等仿真里机器人和控制器就绪。
+两个终端都在工作空间根目录，且已 `source install/setup.bash`。
 
 ```bash
 ros2 launch robot_move gazebo_move.launch.py
